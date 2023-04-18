@@ -1,0 +1,51 @@
+service: sql-service
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs16.x
+  vpc:
+    securityGroupIds:
+      - sg-028e67e8ac9b8d83b
+    subnetIds:
+      - subnet-03b9161c4a2725dd8
+      - subnet-065f906ee7c8c8077
+      - subnet-093cc374827255998
+      - subnet-09f0ac973955b5041
+      - subnet-0d74cd49085354052
+      - subnet-035a5608db11494e1
+
+plugins:
+  - serverless-offline
+
+functions:
+  
+  RDScreate:
+    handler: handlers/handlerRDScreate.RDScreate
+    events:
+      - httpApi:
+          path: /RDSconnection/RDScreate
+          method: post
+
+  RDSupdate:
+    handler: handlers/handlerRDSupdate.RDSupdate
+    events:
+      - httpApi:
+          path: /RDSconnection/RDSupdate/{id}
+          method: put
+
+  RDSdelete:
+    handler: handlers/handlerRDSdelete.RDSdelete
+    events:
+      - httpApi:
+          path: /RDSconnection/RDSdelete/{id}
+          method: delete
+
+  RDSselect:
+    handler: handlers/handlerRDSselect.RDSselect
+    events:
+      - httpApi:
+          path: /RDSconnection/RDSselect/{id}
+          method: get
+

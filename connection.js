@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-
+// mi comentario
 const configDB = {
     connectionLimit: 10,
     host: 'rds-test.ct3dovxeauuu.us-east-1.rds.amazonaws.com',

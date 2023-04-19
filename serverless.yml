@@ -5,6 +5,7 @@ frameworkVersion: '3'
 provider:
   name: aws
   runtime: nodejs16.x
+  profile: 'lambda-dev-recluta'
   vpc:
     securityGroupIds:
       - sg-028e67e8ac9b8d83b
@@ -47,5 +48,12 @@ functions:
     events:
       - httpApi:
           path: /RDSconnection/RDSselect/{id}
+          method: get
+
+  RDSselectAll:
+    handler: handlers/handlerRDSselectAll.RDSselectAll
+    events:
+      - httpApi:
+          path: /RDSconnection/RDSselectAll
           method: get
 

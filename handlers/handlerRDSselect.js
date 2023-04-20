@@ -6,7 +6,7 @@ module.exports.RDSselect =  (event, context, callback) => {
   const usuarioId = event.pathParameters.id;
 
 
-
+  const headers = {'Content-Type':'application/json','Access-Control-Allow-Origin': '*','Access-Control-Allow-Credentials': true}
   const sql = "SELECT ID, USUARIO, NOMBRE FROM usuarios WHERE ID = ? ;"
 
   pool.getConnection(function(err, connection){
@@ -15,9 +15,7 @@ module.exports.RDSselect =  (event, context, callback) => {
       if(error){
         callback ({
           statusCode:400,
-          headers:{
-            'Content-Type':'application/json'
-          },
+          headers,
           body: context.fail(JSON.stringify({
             success: false,
             message: error
@@ -26,9 +24,7 @@ module.exports.RDSselect =  (event, context, callback) => {
       }else{
         callback(null,{
           statusCode:200,
-          headers:{
-            'Content-Type':'application/json'
-          },
+          headers,
           body:JSON.stringify({
             success: true,
             message: '¡Exito al consultar!',

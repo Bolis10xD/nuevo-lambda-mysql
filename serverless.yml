@@ -6,6 +6,7 @@ provider:
   name: aws
   runtime: nodejs16.x
   profile: 'lambda-dev-recluta'
+  region: 'us-east-1'
   vpc:
     securityGroupIds:
       - sg-028e67e8ac9b8d83b
@@ -46,9 +47,10 @@ functions:
   RDSselect:
     handler: handlers/handlerRDSselect.RDSselect
     events:
-      - httpApi:
+      - http:
           path: /RDSconnection/RDSselect/{id}
           method: get
+          cors: true
 
   RDSselectAll:
     handler: handlers/handlerRDSselectAll.RDSselectAll
